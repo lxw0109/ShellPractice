@@ -6,7 +6,8 @@
 #NOTE: Only use space where it's essential.(e.g. '[ -e a.txt ]') & Don't use it where it's not essential.(e.g. 'y="abc"')
 
 #read & echo
-read -p "Please input your name:" name	# Not essential to Decalre the variable name
+#No need to Decalre the variable name
+read -p "Please input your name:" name
 echo -e "Hello $name\n"	# -e for '\n'
 
 
@@ -57,11 +58,11 @@ fi
 
 #function & case
 repeat(){
-	echo "I don't know $1 $2"	#NOT 'bash filename $1 $2', BUT the parameters delivered to the function repeat(). Here,it refers to 'YOUR' and 'NAME'
+	#$0 is filename, but $1 $2 NOT 'bash filename $1 $2', BUT the parameters delivered to the function repeat(). Here,it refers to "What\'s" "YOUR" and "NAME"
+	echo "I don't know $0 $1 $2 $3"
 }
-echo "\$1=$1, \$2=$2"	#'bash filename $1 $2'
-repeat YOUR NAME
-
+echo "\$0=$0, \$1=$1, \$2=$2"	#'bash filename $1 $2'
+repeat What\'s your name
 
 function printit(){
 	echo -n "Your choice is : "	# -n means 'WITHOUT NEWLINE'. echo is with NEWLINE by default.
@@ -102,7 +103,7 @@ echo "ok, while is over"
 
 #until do done
 #NOTE: 'until [ "$yn" = "no" || "$yn" = "NO" ]' is WRONG.
-until [ "$yn" = "no" ] || [ "$yn" = "NO" ]
+until [ "$yn" == "no" ] || [ "$yn" == "NO" ]
 do
 	read -p "Please input no/NO to stop this program : " yn
 done
@@ -190,5 +191,5 @@ echo ""		#newline
 sports=($(cat sports.txt|tr '\n' ' '))	# Note this method to set values for array.
 echo ${sports[@]}
 
-#${array2[@]:2}		# ELEMENTS from the THIRD to the end.
-#${array2[@]:3:2}	# TWO ELEMENTS after the FOURTH element.
+echo ${sports[@]:2}		# ELEMENTS from the THIRD to the end.
+echo ${sports[@]:3:2}	# TWO ELEMENTS after the FOURTH element.
